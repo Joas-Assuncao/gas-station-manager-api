@@ -1,9 +1,9 @@
-import { Controller, Get } from '@nestjs/common';
-import { Body, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ParseUUIDPipe } from '@nestjs/common/pipes/parse-uuid.pipe';
 
+import { DriverDTO } from './driver.dto';
 import { DriverEntity } from './driver.entity';
 import { DriverService } from './driver.service';
-import { DriverDTO } from './driver.dto';
 
 @Controller('drivers')
 export class DriverController {
@@ -12,6 +12,16 @@ export class DriverController {
   @Get()
   async findAll(): Promise<DriverEntity[]> {
     return await this.driverService.findAll();
+  }
+
+  @Get('withRefuelings')
+  async findAllWithRefuelings(): Promise<DriverEntity[]> {
+    return await this.driverService.findAllWithRefuelings();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<DriverEntity> {
+    return await this.driverService.findOne(id);
   }
 
   @Post()

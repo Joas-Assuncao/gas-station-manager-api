@@ -10,6 +10,8 @@ export class DriverEntity {
   @Column()
   name: string;
 
-  @OneToMany(() => RefuelingEntity, (refueling) => refueling.driver)
+  @OneToMany(() => RefuelingEntity, (refueling) => refueling.driver, {
+    cascade: true,
+  })
   refuelings: RefuelingEntity[];
 }
