@@ -20,6 +20,9 @@ export class RefuelingEntity {
   @Column({ name: 'fuel_type', type: 'integer' })
   fuelType: FuelType;
 
+  @Column({ name: 'fuel_price', type: 'decimal', precision: 10, scale: 2 })
+  fuelPrice: number;
+
   @Column({ name: 'total_price', type: 'decimal', precision: 10, scale: 2 })
   totalPrice: number;
 
@@ -30,6 +33,8 @@ export class RefuelingEntity {
   })
   refuelingDate: Date;
 
-  @ManyToOne(() => DriverEntity, (driver) => driver.refuelings)
+  @ManyToOne(() => DriverEntity, (driver) => driver.refuelings, {
+    onDelete: 'CASCADE',
+  })
   driver: DriverEntity;
 }
