@@ -1,11 +1,7 @@
-import { IsArray, IsNotEmpty, IsString } from 'class-validator';
-import { RefuelingDTO } from '../refueling/refueling.dto';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class DriverDTO {
   @IsString()
   @IsNotEmpty()
   name: string;
-
-  @IsArray()
-  refueling: RefuelingDTO[];
 }
