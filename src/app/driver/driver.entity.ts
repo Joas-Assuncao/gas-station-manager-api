@@ -1,4 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
 import { RefuelingEntity } from '../refueling/refueling.entity';
 
 @Entity({ name: 'driver' })
