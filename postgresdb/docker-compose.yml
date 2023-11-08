@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'bitnami/postgresql:latest'
+    container_name: 'postgres'
+    environment:
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD=root
+      - POSTGRESQL_DATABASE=manager_gas_station
+    ports:
+      - '5432:5432'
