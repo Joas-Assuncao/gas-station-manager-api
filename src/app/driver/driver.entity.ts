@@ -10,8 +10,14 @@ export class DriverEntity {
   @Column()
   name: string;
 
+  @Column({ unique: true })
+  email: string;
+
   @OneToMany(() => RefuelingEntity, (refueling) => refueling.driver, {
     cascade: true,
   })
   refuelings: RefuelingEntity[];
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createdAt: Date;
 }
