@@ -29,9 +29,17 @@ export class RefuelingService {
     refuelingEntity.liters = refueling.liters;
     refuelingEntity.fuelType = refueling.fuelType;
     refuelingEntity.fuelPrice = refueling.fuelPrice;
+    refuelingEntity.totalPrice = this.calculateTotalPrice(
+      refueling.liters,
+      refueling.fuelPrice,
+    );
 
     refuelingEntity.driver = driver;
 
     return this.refuelingRepository.save(refuelingEntity);
+  }
+
+  private calculateTotalPrice(liters: number, fuelPrice: number): number {
+    return liters * fuelPrice;
   }
 }

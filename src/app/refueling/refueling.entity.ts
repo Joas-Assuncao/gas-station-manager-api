@@ -14,7 +14,7 @@ export class RefuelingEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column({ type: 'decimal', precision: 10, scale: 2 })
   liters: number;
 
   @Column({ name: 'fuel_type', type: 'integer' })
