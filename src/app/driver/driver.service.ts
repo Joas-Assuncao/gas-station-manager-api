@@ -28,7 +28,16 @@ export class DriverService {
   }
 
   async findAll(): Promise<DriverEntity[]> {
-    return await this.driverRepository.find();
+    return await this.driverRepository.find({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+      order: {
+        createdAt: 'DESC',
+      },
+    });
   }
 
   async findAllWithRefuelings(): Promise<DriverEntity[]> {
@@ -46,6 +55,7 @@ export class DriverService {
   async create(driver: DriverDTO): Promise<DriverEntity> {
     const driverEntity = new DriverEntity();
     driverEntity.name = driver.name;
+    driverEntity.email = driver.email;
 
     return await this.driverRepository.save(driverEntity);
   }
