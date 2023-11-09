@@ -48,6 +48,8 @@ Deverá aparecer em seu terminal:
 
 Uma das coisas que é interessante para a DX (Dev Experience) do NestJS, ele retorna todos os endpoints da aplicação no terminal assim que inicia, como vocês podem ver acima!
 
+## 🚨 Atenção
+
 Ponto importante para salvamento de refuelings: FuelType tem 3 tipos de combustíveis, cada um com seu número:
 
 ```
