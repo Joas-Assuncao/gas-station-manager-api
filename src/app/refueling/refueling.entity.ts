@@ -12,7 +12,7 @@ import { FuelType } from './enum/FuelType.enum';
 @Entity({ name: 'fueling_records' })
 export class RefuelingEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   liters: number;
@@ -43,10 +43,10 @@ export class RefuelingEntity {
     type: 'timestamp with time zone',
     default: () => 'CURRENT_TIMESTAMP',
   })
-  refuelingDate: Date;
+  refuelingDate: string;
 
   @ManyToOne(() => DriverEntity, (driver) => driver.refuelings, {
     onDelete: 'CASCADE',
   })
-  driver: DriverEntity;
+  driver?: DriverEntity;
 }

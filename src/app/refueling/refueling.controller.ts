@@ -21,6 +21,6 @@ export class RefuelingController {
     @Param('driverId', ParseUUIDPipe) driverId: string,
     @Body() refueling: RefuelingDTO,
   ): Promise<RefuelingEntity> {
-    return await this.refuelingService.save(driverId, refueling);
+    return await this.refuelingService.create(driverId, refueling);
   }
 }
