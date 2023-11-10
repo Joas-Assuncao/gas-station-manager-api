@@ -14,16 +14,28 @@ export class RefuelingEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'decimal', precision: 10, scale: 2, nullable: false })
   liters: number;
 
-  @Column({ name: 'fuel_type', type: 'integer' })
+  @Column({ name: 'fuel_type', type: 'integer', nullable: false })
   fuelType: FuelType;
 
-  @Column({ name: 'fuel_price', type: 'decimal', precision: 10, scale: 2 })
+  @Column({
+    name: 'fuel_price',
+    type: 'decimal',
+    nullable: false,
+    precision: 10,
+    scale: 2,
+  })
   fuelPrice: number;
 
-  @Column({ name: 'total_price', type: 'decimal', precision: 10, scale: 2 })
+  @Column({
+    name: 'total_price',
+    type: 'decimal',
+    nullable: false,
+    precision: 10,
+    scale: 2,
+  })
   totalPrice: number;
 
   @CreateDateColumn({

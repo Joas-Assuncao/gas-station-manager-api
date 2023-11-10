@@ -7,10 +7,10 @@ export class DriverEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ nullable: false })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: false })
   email: string;
 
   @OneToMany(() => RefuelingEntity, (refueling) => refueling.driver, {
