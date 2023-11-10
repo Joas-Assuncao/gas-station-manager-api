@@ -16,6 +16,9 @@ export class RefuelingService {
 
   async findAllById(id: string): Promise<RefuelingEntity[]> {
     return await this.refuelingRepository.find({
+      order: {
+        refuelingDate: 'DESC',
+      },
       where: {
         driver: { id },
       },
