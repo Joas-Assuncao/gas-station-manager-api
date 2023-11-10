@@ -16,8 +16,8 @@ export class DriverEntity {
   @OneToMany(() => RefuelingEntity, (refueling) => refueling.driver, {
     cascade: true,
   })
-  refuelings: RefuelingEntity[];
+  refuelings?: RefuelingEntity[];
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  createdAt: Date;
+  createdAt?: string;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { NotFoundException } from '@nestjs/common/exceptions/not-found.exception';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -17,6 +17,20 @@ export class DriverService {
     const driverFound = await this.driverRepository.findOne({
       where: {
         id,
+      },
+    });
+
+    if (!driverFound) {
+      throw new NotFoundException('Motorista não encontrado');
+    }
+
+    return driverFound;
+  }
+
+  async findOneByEmail(email: string) {
+    const driverFound = await this.driverRepository.findOne({
+      where: {
+        email,
       },
     });
 
@@ -53,15 +67,35 @@ export class DriverService {
   }
 
   async create(driver: DriverDTO): Promise<DriverEntity> {
+    const driverFound = await this.driverRepository.findOne({
+      where: {
+        email: driver.email,
+      },
+    });
+
+    if (driverFound) {
+      throw new BadRequestException('Motorista já cadastrado');
+    }
+
     const driverEntity = new DriverEntity();
     driverEntity.name = driver.name;
     driverEntity.email = driver.email;
 
-    return await this.driverRepository.save(driverEntity);
+    const driverCreated = await this.driverRepository.save(driverEntity);
+    console.log(driverCreated);
+
+    return driverCreated;
   }
 
   async update(id: string, driver: DriverDTO): Promise<DriverEntity> {
-    await this.findOne(id);
+    const [driverFoundById, driverFoundByEmail] = await Promise.all([
+      this.findOne(id),
+      this.findOneByEmail(driver.email),
+    ]);
+
+    if (driverFoundById.id !== driverFoundByEmail.id) {
+      throw new BadRequestException('E-mail já cadastrado');
+    }
 
     const driverEntity = new DriverEntity();
     driverEntity.id = id;
