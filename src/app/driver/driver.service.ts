@@ -59,4 +59,15 @@ export class DriverService {
 
     return await this.driverRepository.save(driverEntity);
   }
+
+  async update(id: string, driver: DriverDTO): Promise<DriverEntity> {
+    await this.findOne(id);
+
+    const driverEntity = new DriverEntity();
+    driverEntity.id = id;
+    driverEntity.name = driver.name;
+    driverEntity.email = driver.email;
+
+    return await this.driverRepository.save(driverEntity);
+  }
 }

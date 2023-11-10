@@ -19,6 +19,13 @@ export class RefuelingService {
       where: {
         driver: { id },
       },
+      select: {
+        liters: true,
+        fuelType: true,
+        fuelPrice: true,
+        totalPrice: true,
+        refuelingDate: true,
+      },
     });
   }
 

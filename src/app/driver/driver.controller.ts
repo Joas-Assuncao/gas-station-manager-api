@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { ParseUUIDPipe } from '@nestjs/common/pipes/parse-uuid.pipe';
 
 import { DriverDTO } from './driver.dto';
@@ -27,5 +27,13 @@ export class DriverController {
   @Post()
   async create(@Body() driver: DriverDTO): Promise<DriverEntity> {
     return await this.driverService.create(driver);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() driver: DriverDTO,
+  ): Promise<DriverEntity> {
+    return await this.driverService.update(id, driver);
   }
 }
