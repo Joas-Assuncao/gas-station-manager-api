@@ -34,10 +34,6 @@ export class DriverService {
       },
     });
 
-    if (!driverFound) {
-      throw new NotFoundException('Motorista não encontrado');
-    }
-
     return driverFound;
   }
 
@@ -67,11 +63,7 @@ export class DriverService {
   }
 
   async create(driver: DriverDTO): Promise<DriverEntity> {
-    const driverFound = await this.driverRepository.findOne({
-      where: {
-        email: driver.email,
-      },
-    });
+    const driverFound = await this.findOneByEmail(driver.email);
 
     if (driverFound) {
       throw new BadRequestException('Motorista já cadastrado');
@@ -82,7 +74,6 @@ export class DriverService {
     driverEntity.email = driver.email;
 
     const driverCreated = await this.driverRepository.save(driverEntity);
-    console.log(driverCreated);
 
     return driverCreated;
   }
@@ -93,7 +84,7 @@ export class DriverService {
       this.findOneByEmail(driver.email),
     ]);
 
-    if (driverFoundById.id !== driverFoundByEmail.id) {
+    if (driverFoundByEmail && driverFoundById.id !== driverFoundByEmail.id) {
       throw new BadRequestException('E-mail já cadastrado');
     }
 

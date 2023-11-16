@@ -32,7 +32,10 @@ export class RefuelingService {
     });
   }
 
-  async create(driverId, refueling: RefuelingDTO): Promise<RefuelingEntity> {
+  async create(
+    driverId: string,
+    refueling: RefuelingDTO,
+  ): Promise<RefuelingEntity> {
     const driver = await this.driverService.findOne(driverId);
 
     const refuelingEntity = new RefuelingEntity();
